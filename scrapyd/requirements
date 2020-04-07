@@ -1,0 +1,6 @@
+requests
+pymongo
+pymysql
+scrapy
+scrapyd
+scrapyd-client
