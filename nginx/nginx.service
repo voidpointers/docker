@@ -12,7 +12,7 @@ ExecStartPre=-/usr/bin/docker kill nginx
 ExecStartPre=-/usr/bin/docker rm nginx
 ExecStartPre=-/home/core/docker/shell/install_fleetctl nginx
 ExecStartPre=-/usr/bin/docker network create nginx-network
-ExecStart=/usr/bin/docker run --name nginx --net nginx-network -p 8000:8000 -p 3000:3000 -p 80:80 -p 443:443 -v /home/core/data/nginx:/etc/nginx -v /home/core/workspace/php:/www ywy/nginx
+ExecStart=/usr/bin/docker run --name nginx --net nginx-network -p 80:80 -p 443:443 --privileged=true -v /home/core/data/nginx:/etc/nginx -v /home/core/workspace:/www -d nginx
 ExecStop=/usr/bin/docker stop nginx
 ExecStop=/usr/bin/docker kill nginx
 
