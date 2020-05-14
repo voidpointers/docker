@@ -1,5 +1,7 @@
 FROM php:5.6-fpm-alpine
 
+RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories
+
 RUN apk add bash autoconf build-base \
     && apk add --no-cache bash wget libpng-dev libmcrypt-dev libstdc++ libevent-dev openssl-dev libzip-dev \
     && docker-php-ext-install gd mysql mysqli pdo_mysql bcmath opcache pcntl \
