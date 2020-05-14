@@ -1,0 +1,23 @@
+[Unit]
+Description=php56
+After=docker.service
+Requires=docker.service
+
+[Service]
+Restart=always
+RestartSec=30
+TimeoutStartSec=0
+ExecStartPre=-/usr/bin/docker stop php56
+ExecStartPre=-/usr/bin/docker kill php56
+ExecStartPre=-/usr/bin/docker rm php56
+ExecStartPre=-/home/core/docker/shell/install_fleetctl php56
+ExecStartPre=-/usr/bin/docker network create nginx-network
+ExecStart=/usr/bin/docker run --name php56 --net nginx-network -v /home/core/data/php56:/php -v /home/core/workspace:/www core/php56
+ExecStop=/usr/bin/docker stop php56
+ExecStop=/usr/bin/docker kill php56
+
+[Install]
+WantedBy=multi-user.target
+
+[X-Fleet]
+Global=true
